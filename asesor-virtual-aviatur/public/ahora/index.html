@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Asesor de AVIATUR online ahora mismo</title>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="../css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/x-icon" href="https://www.aviatur.com/version/528/assets/aviatur_assets/img/favicon.png">
+        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js"></script>
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <!-- Compiled and minified JavaScript -->
+        <script src="../js/materialize.min.js"></script>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to usehttps://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-database.js"></script>
+
+        <style media="screen">
+            html,body{
+                font-family: 'Poppins', sans-serif !important;
+                font-weight:400;
+            }
+            nav{
+                background: #014785; 
+                height: auto; 
+                line-height: normal;
+            }
+            nav img.aviatur{
+                height: 30px;
+                margin: 20px 0; 
+            }
+            nav img.amresorts{
+                height: 40px;
+                margin: 10px 0;
+                float: right; 
+            }
+            .background{
+                /*background-image: url('img/asesor-virtual.jpg'); */  
+                background-size: contain; 
+                background-position: center top; 
+                background-attachment: fixed; 
+                background-color: #fff;
+            }
+            .title{
+                font-size:22px;
+                font-weight:300;
+            }
+            .caption{
+                font-family: 'Poppins', sans-serif !important;
+                font-size: 28px;
+                font-weight: 700;
+                line-height: 32px;
+            }
+            .card.asesor { 
+                background-color: #014785; 
+            }
+            .card.asesor .card-image img { padding: 2vh 20vh; }
+            .card.asesor .card-content { padding: 5px 20px; }
+            .card.asesor .card-content h5{ color: #ffffff; }
+            .card.asesor .card-action { background-color: transparent; border-top: 1px solid rgba(160,160,160,0.5); }
+            .row .col{min-height: auto; }
+            .desk-hide{display:none}
+            .calendly-inline-widget{
+                min-width:320px;
+                height:75vh;
+                margin-top:8vh;
+            }
+            @media screen and (max-width: 1450px) {
+                .card.banner .card-content { min-height: 250px; padding: 15px; }
+            }
+
+            @media screen and (max-width: 1048px) {
+                .card.banner .card-content { min-height: 310px; }
+            }
+            @media screen and (max-width: 600px) {
+                .calendly-inline-widget{margin-top:0vh}
+                .title{font-size:1.8rem}
+                h5{font-size:1.2rem}
+                #calendar-container{margin-bottom: 50px}
+                .mobile-hide{ display: none; }
+                .desk-hide{display:block}
+                nav { height: 37px !important; }
+            }
+        </style>
+    </head>
+    <body class="background">
+        <nav>
+            <div class="nav-wrapper row container">
+                <div class="col s12 m4 l6">
+                    <img class="aviatur" src="./img/logo-semana-azul.png" alt="Aviatur">
+                </div>
+                <div class="col s12 m4 l6">
+                    <img class="amresorts" src="./img/amresorts.png" alt="AMResorts">
+                </div>
+            </div>
+        </nav>
+        <div id="app" class="container">
+            <div class="row center">
+                <div class="col s12">
+                    <div class="preloader-wrapper active" v-if="advisers.length==0">
+                        <div class="spinner-layer spinner-blue-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="gap-patch">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12">
+                    <h5 class="blue-text text-darken-4">Reserve ahora su plan con AMResorts <br>
+                    Hable ya con un asesor</h5>
+                </div>
+                <div class="col s12 m12 l4" v-for="adviser in advisers">
+                    <div class="card asesor" v-if="adviser.active">
+                        <div class="card-image">
+                            <img src="./img/img-asesor.png" />
+                        </div>
+                        <div class="card-content center white-text">
+                            <h5>Video llamada con el asesor {{adviser.name}}</h5>
+                        </div>
+                        <div class="card-action center">
+                            <a :href="adviser.url" class="btn white indigo-text waves-effect waves-light">Unirse a la video llamada</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 center">
+                    <div class="container">
+                        <p>Si prefiere agendar su cita ingrese <a href="https://hablecon.aviatur.com">aquí</a> </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 m12 l4">
+                    <div class="card banner">
+                        <div class="card-image">
+                            <img src="./img/punta-cana-hotel-dreams.jpg"/>
+                        </div>
+                        <div class="card-content center blue-text text-darken-4">
+                            <h6 class="thin">Punta Cana</h6> 
+                            <h6 class="caption">Hotel Dreams Palm Beach</h6> 
+                            <h6 class="thin">desde USD 480</h6> 
+                            <p>por persona por estadía</p>
+                        </div>
+                        <div class="card-action center" style="border:0px solid white">
+                            <a href="https://www.aviatur.com/paquetes/detalle/23483-5-1/producto-aviatur-punta-cana-promocion-quinta-noche-gratis-hotel-dreams-palm-beach" target="_blank" class="btn blue darken-4 waves-effect waves-light">Ver detalle</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m12 l4">
+                    <div class="card banner">
+                        <div class="card-image">
+                            <img src="./img/cancun-hotel-dreams.jpg"/>
+                        </div>
+                        <div class="card-content center blue-text text-darken-4">
+                            <h6 class="thin">Cancún</h6> 
+                            <h6 class="caption">Hotel Dreams Sands Cancún</h6> 
+                            <h6 class="thin">desde USD 540</h6> 
+                            <p>por persona por estadía</p>
+                        </div>
+                        <div class="card-action center" style="border:0px solid white">
+                            <a href="https://www.aviatur.com/paquetes/detalle/23482-5-1/producto-aviatur-promocion-quinta-noche-gratis-dreams-sans-cancun" target="_blank" class="btn blue darken-4 waves-effect waves-light">Ver detalle</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m12 l4">
+                    <div class="card banner">
+                        <div class="card-image">
+                            <img src="./img/curacao-sunscape.jpg"/>
+                        </div>
+                        <div class="card-content center blue-text text-darken-4">
+                            <h6 class="thin">Curacao</h6> 
+                            <h6 class="caption">Sunscape Curacao</h6> 
+                            <h6 class="thin">desde USD 353</h6> 
+                            <p>por persona por estadía</p>
+                        </div>
+                        <div class="card-action center" style="border:0px solid white">
+                            <a href="https://www.aviatur.com/paquetes/detalle/22973-3-1/producto-aviatur-promocion-curacao-hotel-sunscape-2021" target="_blank" class="btn blue darken-4 waves-effect waves-light">Ver detalle</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 m12 l4">
+                    <div class="card banner">
+                        <div class="card-image">
+                            <img src="./img/puerto-vallarta-hotel-sunscape.jpg"/>
+                        </div>
+                        <div class="card-content center blue-text text-darken-4">
+                            <h6 class="thin">Puerto Vallarta</h6> 
+                            <h6 class="caption">Sunscape Puerto Vallarta</h6> 
+                            <h6 class="thin">desde USD 343</h6> 
+                            <p>por persona por estadía</p>
+                        </div>
+                        <div class="card-action center" style="border:0px solid white">
+                            <a href="https://www.aviatur.com/paquetes/detalle/23509-5-1/producto-aviatur-puerto-vallarta-hotel-sunscape-puerto-vallarta-promocion-cuarta-noche-gratis" target="_blank" class="btn blue darken-4 waves-effect waves-light">Ver detalle</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m12 l4">
+                    <div class="card banner">
+                        <div class="card-image">
+                            <img src="./img/riviera-maya-now.jpg"/>
+                        </div>
+                        <div class="card-content center blue-text text-darken-4">
+                            <h6 class="thin">Riviera Maya</h6> 
+                            <h6 class="caption">Hotel Now Sapphire</h6> 
+                            <h6 class="thin">desde USD 536</h6> 
+                            <p>por persona por estadía</p>
+                        </div>
+                        <div class="card-action center" style="border:0px solid white">
+                            <a href="https://www.aviatur.com/paquetes/detalle/23492-5-1/producto-aviatur-cancun--promocion-quinta-noche-gratis-hotel-now-sapphire" target="_blank" class="btn blue darken-4 waves-effect waves-light">Ver detalle</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m12 l4">
+                    <div class="card banner">
+                        <div class="card-image">
+                            <img src="./img/cancun-now-emerald.jpg"/>
+                        </div>
+                        <div class="card-content center blue-text text-darken-4">
+                            <h6 class="thin">Cancún</h6> 
+                            <h6 class="caption">Hotel Now Emerald</h6> 
+                            <h6 class="thin">desde USD 456</h6> 
+                            <p>por persona por estadía</p>
+                        </div>
+                        <div class="card-action center" style="border:0px solid white">
+                            <a href="https://www.aviatur.com/paquetes/detalle/23490-5-1/producto-aviatur-promocion-quinta-noche-gratis-cancun-hotel-now-emerald-" target="_blank" class="btn blue darken-4 waves-effect waves-light">Ver detalle</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 m12 l4">
+                    <div class="card banner">
+                        <div class="card-image">
+                            <img src="./img/riviera-maya-sunscape.jpg"/>
+                        </div>
+                        <div class="card-content center blue-text text-darken-4">
+                            <h6 class="thin">Riviera Maya</h6> 
+                            <h6 class="caption">Sunscape Akumal</h6> 
+                            <h6 class="thin">desde USD 460</h6> 
+                            <p>por persona por estadía</p>
+                        </div>
+                        <div class="card-action center" style="border:0px solid white">
+                            <a href="https://www.aviatur.com/paquetes/detalle/23261-5-1/producto-aviatur-riviera-maya-promocion-hotel-sunscape-akumal-beach" target="_blank" class="btn blue darken-4 waves-effect waves-light">Ver detalle</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m12 l4">
+                    <div class="card banner">
+                        <div class="card-image">
+                            <img src="./img/loscabos-hotel-secrets.jpg"/>
+                        </div>
+                        <div class="card-content center blue-text text-darken-4">
+                            <h6 class="thin">Los Caobos</h6> 
+                            <h6 class="caption">Hotel Secrets Puerto Los Caobos</h6> 
+                            <h6 class="thin">desde USD 675</h6> 
+                            <p>por persona por estadía</p>
+                        </div>
+                        <div class="card-action center" style="border:0px solid white">
+                            <a href="https://www.aviatur.com/paquetes/detalle/23486-5-1/producto-aviatur-promocion-quinta-noche-gratis-hotel-secrets-los-cabos-todo-incluido" target="_blank" class="btn blue darken-4 waves-effect waves-light">Ver detalle</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m12 l4">
+                    <div class="card banner">
+                        <div class="card-image">
+                            <img src="./img/punta-cana-hotel-secrets.jpg"/>
+                        </div>
+                        <div class="card-content center blue-text text-darken-4">
+                            <h6 class="thin">Punta Cana</h6> 
+                            <h6 class="caption">Hotel Secrets Royal Beach</h6> 
+                            <h6 class="thin">desde USD 609</h6> 
+                            <p>por persona por estadía</p>
+                        </div>
+                        <div class="card-action center" style="border:0px solid white">
+                            <a href="https://www.aviatur.com/paquetes/detalle/23495-5-1/producto-aviatur-promocion-quinta-noche-gratis-punta-cana-hotel-secrets-royal-beach-punta-cana-" target="_blank" class="btn blue darken-4 waves-effect waves-light">Ver detalle</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="../js/front.js"></script>
+    </body>
+</html>

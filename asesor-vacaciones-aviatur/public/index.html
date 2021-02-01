@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Asesor en línea de AVIATUR</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="./css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="https://www.aviatur.com/version/528/assets/aviatur_assets/img/favicon.png">
+    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js"></script>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- Compiled and minified JavaScript -->
+    <script src="./js/materialize.min.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to usehttps://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-analytics.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyBBfVjZbxOUtzNdpTUfCRNRj1pBcIGKRzI",
+        authDomain: "asesor-virtual-aviatur.firebaseapp.com",
+        databaseURL: "https://asesor-virtual-aviatur.firebaseio.com",
+        projectId: "asesor-virtual-aviatur",
+        storageBucket: "asesor-virtual-aviatur.appspot.com",
+        messagingSenderId: "900213313534",
+        appId: "1:900213313534:web:7f754d7744283f6002baaf",
+        measurementId: "G-PPGTS5B5GT"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
+
+     <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.parallax');
+        M.Parallax.init(elems)
+      })
+     </script>
+    <style media="screen">
+      .title{
+        font-family: 'Poppins', sans-serif;
+      }
+      .desk-hide{display:none}
+      .background{background-image:url('./img/asesor-virtual-fondo.jpg');background-size: cover;}
+      .calendly-inline-widget{min-width:320px;height:75vh;margin-top:8vh;}
+      @media screen and (max-width: 600px) {
+        .background{
+          background-image:url('./img/asesor-virtual-mobile.jpg');
+          background-position:top center;
+          background-size:cover;
+        }
+        .calendly-inline-widget{margin-top:0vh}
+        .title{font-size:1.8rem}
+        h5{font-size:1.2rem}
+        #calendar-container{margin-bottom: 50px}
+        .mobile-hide{ display: none; }
+        .desk-hide{display:block}
+      }
+    </style>
+  </head>
+  <body style="min-height:100vh">
+    <div class="parallax-container background" style="min-height:100vh;height:100%">
+      <div class="row" style="min-height:100vh;margin:0px;background: rgba(0, 0, 0, 0)">
+        <div class="col s12 m12 l8">
+          <br><br><br><br><br><br>
+          <div class="container hide">
+            <div class="col s6">
+              <img class="responsive-img" src="https://www.aviatur.com/version/528/assets/aviatur_assets/img/header/aviatur_logo.svg?" alt="logo AVIATUR">
+            </div>
+            <div class="col s12 white-text ">
+              <h1 class="title">Planee su próximo viaje desde casa</h1>
+              <h5 class="thin">AVIATUR lo asesora durante la planeación de su viaje con la ayuda de un experto que resolverá sus dudas. Al agendar una cita, recibirá un enlace a su correo electrónico para una video llamada con un asesor.</h5>
+            </div>
+          </div>
+        </div>
+        <div id="calendar-container" class="col s12 m12 l3">
+          <div class="calendly-inline-widget" data-url="https://calendly.com/aviatur-asesores/hable-con-aviatur-vacaciones?background_color=fff"></div>
+        </div>
+        <div class="col s12 hide" style="bottom:0px;position:absolute;opacity: 0.4;">
+          <p class="white-text right">Foto por: <a href="https://www.instagram.com/andresgarzon8/" target="_blank">@andresgarzon8</a></p>
+        </div>
+      </div>
+      <div class="parallax hide">
+        <img class="responsive-img mobile-hide" src="./img/asesor-virtual-fondo.jpg?" alt="">
+        <img class="desk-hide" style="opacity:1" src="./img/andres-garzon-vertical.jpg?" alt="">
+        <!--
+        <div class="calendly-inline-widget" data-url="https://calendly.com/yarednicolas/asesor-virtual?embed_type=Inline&background_color=2f2f2f&text_color=ffffff&primary_color=005eb8" style="min-width:320px;height:650px;"></div>
+https://images.pexels.com/photos/3053804/pexels-photo-3053804.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+https://images.pexels.com/photos/2108813/pexels-photo-2108813.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260
+        <iframe style="min-height:100vh;width:100%" src="https://www.youtube.com/embed/OQFW5irGeXI?controls=0&showinfo=0&rel=0&autoplay=1&mute=1&loop=1&playlist=S0PP3I0dfu0" frameborder="0" allowfullscreen></iframe>-->
+      </div>
+    </div>
+
+
+  </body>
+</html>
